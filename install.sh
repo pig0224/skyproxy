@@ -20,6 +20,7 @@ RestartSec=5
 WantedBy=multi-user.target
 EOF
 
+rm -rf "$extracted_folder" &&
 wget "$repo_url/raw/main/v1.0.0/$file_path" -O sky-manager.zip &&
 unzip -q sky-manager.zip -d "$extracted_folder" &&
 chmod +x /root/sky/manager &&
