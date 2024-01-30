@@ -99,9 +99,8 @@ async function start() {
     });
     try {
         await PM2.connect()
-        await PM2.start(skyPath, isWin ? 'manager.exe' : 'manager', name)
+        await PM2.start(skyPath, isWin() ? 'manager.exe' : 'manager', name)
         PM2.disconnect()
-        console.info("Skyproxy started")
     } catch (err) {
         PM2.disconnect()
         console.error(err);
@@ -110,7 +109,6 @@ async function start() {
 }
 
 async function update() {
-    console.info("updating...")
     const { exec } = require('child_process');
     const packageName = require("../package.json").name;
     const updateCommand = `npm install -g ${packageName}@latest`;
@@ -120,10 +118,6 @@ async function update() {
         exec(updateCommand, async (error, stdout, stderr) => {
             if (error) {
                 reject(error)
-                return;
-            }
-            if (stderr) {
-                reject(stderr)
                 return;
             }
             await fs.remove(path.join(skyPath, "www"))
@@ -142,7 +136,9 @@ async function main() {
 
     program.command('start').description('start sky manager').action(async () => {
         try {
+            console.info("starting...")
             await start();
+            console.info("Skyproxy started")
         } catch (err) {
             console.error("update error: " + err)
             process.exit(2)
@@ -166,6 +162,7 @@ async function main() {
         try {
             await PM2.connect()
             await PM2.stop(name)
+            await PM2.delete(name)
             PM2.disconnect()
             console.info("skyproxy stopped")
         } catch (err) {
@@ -177,6 +174,7 @@ async function main() {
 
     program.command('update', { isDefault: true }).action(async () => {
         try {
+            console.info("updating...")
             await update();
             await PM2.connect()
             const status = await PM2.status(name)
@@ -186,6 +184,7 @@ async function main() {
             await PM2.delete(name)
             await start();
             PM2.disconnect()
+            console.info("update success")
         } catch (err) {
             PM2.disconnect()
             console.error("update error: " + err)

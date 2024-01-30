@@ -1,5 +1,5 @@
 {
-    "name": "sky-mgr",
+    "name": "sky-manager",
     "main": "./bin/index.js",
     "version": "1.0.0",
     "author": "Skyproxy Ltd <manager@skyproxy.cn> (http://skyproxy.cn/)",
