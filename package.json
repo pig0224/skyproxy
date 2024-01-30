@@ -1,0 +1,35 @@
+{
+    "name": "@skyproxy/manager",
+    "main": "./bin/index.js",
+    "version": "1.0.0",
+    "author": "Skyproxy Ltd <manager@skyproxy.cn> (http://skyproxy.cn/)",
+    "description": "A configurable local proxy for skyproxy",
+    "license": "ISC",
+    "bin": {
+        "skyproxy": "bin/index.js",
+        "sky": "bin/index.js"
+    },
+    "scripts": {
+        "start": "./bin/index.js"
+    },
+    "config": {
+        "unsafe-perm": true
+    },
+    "engines": {
+        "node": ">=14.19.0"
+    },
+    "homepage": "http://skyproxy.cn",
+    "keywords": [
+        "skyproxy",
+        "proxy",
+        "manager"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/pig0224/skyproxy.git"
+    },
+    "dependencies": {
+        "commander": "^11.1.0",
+        "pm2": "^5.3.1"
+    }
+}
