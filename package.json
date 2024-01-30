@@ -1,5 +1,5 @@
 {
-    "name": "@skyproxy/manager",
+    "name": "sky-manager",
     "main": "./bin/index.js",
     "version": "1.0.0",
     "author": "Skyproxy Ltd <manager@skyproxy.cn> (http://skyproxy.cn/)",
@@ -28,8 +28,13 @@
         "type": "git",
         "url": "git://github.com/pig0224/skyproxy.git"
     },
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
+    },
     "dependencies": {
         "commander": "^11.1.0",
+        "fs-extra": "^11.2.0",
         "pm2": "^5.3.1"
     }
 }

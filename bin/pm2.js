@@ -48,7 +48,11 @@ module.exports = {
                     reject(err);
                     return;
                 }
-                resolve(data[0]);
+                if(data?.length > 0){
+                    resolve(data[0].pm2_env.status);
+                }else{
+                    resolve("stopped")
+                }
             })
         })
     },
