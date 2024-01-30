@@ -41,6 +41,13 @@ module.exports = {
             })
         })
     },
+    delete: (name) =>{
+        return new Promise((resolve) => {
+            pm2.delete(name, ()=>{
+                resolve();
+            })
+        })
+    },
     status: (name) =>{
         return new Promise((resolve, reject) => {
             pm2.describe(name, (err, data)=>{

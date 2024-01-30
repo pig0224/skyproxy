@@ -83,7 +83,20 @@ async function start() {
         }
     })
     await fs.remove(versionFile)
-    await fs.writeJSON(versionFile, {version: require("../package.json").version})
+    await fs.writeJSON(versionFile, { version: require("../package.json").version })
+    const xPermissions = 0o755;
+    fs.chmod(path.join(skyPath, "manager"), xPermissions, (err) => {
+        if (err) {
+            console.error(`not permissions: ${err.message}`);
+            process.exit(2);
+        }
+    });
+    fs.chmod(path.join(skyPath, "manager.exe"), xPermissions, (err) => {
+        if (err) {
+            console.error(`not permissions: ${err.message}`);
+            process.exit(2);
+        }
+    });
     try {
         await PM2.connect()
         await PM2.start(skyPath, isWin ? 'manager.exe' : 'manager', name)
@@ -170,6 +183,7 @@ async function main() {
             if (status == "online") {
                 await PM2.stop(name)
             }
+            await PM2.delete(name)
             await start();
             PM2.disconnect()
         } catch (err) {
