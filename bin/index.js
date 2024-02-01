@@ -141,7 +141,7 @@ async function main() {
             console.info("visit to manager pannel: http://your_ip:30000/")
             console.info("Skyproxy started")
         } catch (err) {
-            console.error("update error: " + err)
+            console.error("error: " + err)
             process.exit(2)
         }
     })

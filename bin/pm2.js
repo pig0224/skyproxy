@@ -55,7 +55,7 @@ module.exports = {
                     reject(err);
                     return;
                 }
-                if(data?.length > 0){
+                if(data && data.length > 0){
                     resolve(data[0].pm2_env.status);
                 }else{
                     resolve("stopped")
