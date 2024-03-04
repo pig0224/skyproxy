@@ -119,7 +119,6 @@ async function update() {
     const packageName = require("../package.json").name;
     const updateCommand = `npm install -g ${packageName}@latest`;
     const skyPath = path.join(userHome, "sky")
-    const configPath = path.join(skyPath, "config")
 
     return new Promise((resolve, reject) => {
         exec(updateCommand, async (error, stdout, stderr) => {
@@ -130,8 +129,7 @@ async function update() {
             await fs.remove(path.join(skyPath, "manager"))
             await fs.remove(path.join(skyPath, "manager.exe"))
             await fs.remove(path.join(skyPath, "www"))
-            await fs.remove(path.join(configPath, "manager.json"))
-            await fs.remove(path.join(configPath, "manager-proxy.json"))
+            await fs.remove(path.join(skyPath, "config"))
             resolve()
         });
     })
