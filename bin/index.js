@@ -47,6 +47,12 @@ async function start() {
                 }
             }
             const managerProxyJSON = {
+                "dns": {
+                    "strategy": "prefer_ipv4",
+                    "disable_cache": true,
+                    "disable_expire": true,
+                    "independent_cache": true
+                },
                 "inbounds": [],
                 "outbounds": [
                     {
@@ -113,6 +119,7 @@ async function update() {
     const packageName = require("../package.json").name;
     const updateCommand = `npm install -g ${packageName}@latest`;
     const skyPath = path.join(userHome, "sky")
+    const configPath = path.join(skyPath, "config")
 
     return new Promise((resolve, reject) => {
         exec(updateCommand, async (error, stdout, stderr) => {
@@ -120,9 +127,11 @@ async function update() {
                 reject(error)
                 return;
             }
-            await fs.remove(path.join(skyPath, "www"))
             await fs.remove(path.join(skyPath, "manager"))
             await fs.remove(path.join(skyPath, "manager.exe"))
+            await fs.remove(path.join(skyPath, "www"))
+            await fs.remove(path.join(configPath, "manager.json"))
+            await fs.remove(path.join(configPath, "manager-proxy.json"))
             resolve()
         });
     })
