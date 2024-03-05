@@ -1,7 +1,7 @@
 {
     "name": "sky-manager",
     "main": "./bin/index.js",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "author": "Skyproxy Ltd <manager@skyproxy.cn> (http://skyproxy.cn/)",
     "description": "A configurable local proxy for skyproxy",
     "license": "ISC",
